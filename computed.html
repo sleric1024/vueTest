@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VueTest</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<div id="app">
+        <h1>{{ message }}</h1>
+        <h1> {{ reverseMessage }}</h1>
+        <input v-model="message" />
+        <h2> Defaule Getter: {{ fullName }}</h2>
+        <h2> Setter Fuction: {{ newFullName }}</h2>
+	</div>
+</body>
+<script type="text/javascript">
+
+	var app = new Vue({
+        el: "#app",
+        data: {
+            message: "HELLO",
+            firstName: "LL",
+            lastName: "EE"
+        },
+        computed: {
+            reverseMessage: function() {
+                return this.message.split('').reverse().join('');
+            },
+
+            fullName: function() {
+                return this.firstName + ' ' + this.lastName;
+            },
+
+            newFullName: {
+                get: function() {
+                    return this.firstName + ' ' + this.lastName;
+                },
+
+                set: function(newName) {
+                    var names = newName.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1];
+                }
+            }
+        },
+    });
+</script>
+</html>
