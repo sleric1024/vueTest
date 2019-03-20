@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VueTest</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<div id="app">
+        <h1 v-if="isShow">显示</h1>
+        <h1 v-else>隐藏</h1>
+        <mycom v-bind:visibility="isShow"></mycom>
+        <template v-if="isShow">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+        </template>
+        <button v-on:click="changeLoginType">Toggle login type</button>
+        <h1 v-show="ok">Hello!</h1>
+	</div>
+</body>
+<script type="text/javascript">
+    Vue.component("mycom", {
+        props: ['visibility'],
+        template: '<h1 v-if="visibility">测试组件显示</h1>'
+    });
+
+	var app = new Vue({
+        el: "#app",
+        data: {
+            isShow: true,
+            loginType: "username",
+            ok: true
+        },
+        methods: {
+            changeLoginType: function(event) {
+                this.loginType = this.loginType === "username" ? "email" : "username";
+            }
+        }
+    });
+</script>
+</html>
