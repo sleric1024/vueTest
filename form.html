@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VueTest</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<div id="app">
+        <input v-model="msg" placeholder="Input a message">
+        <p> MSG : {{ msg }}</p>
+        <textarea v-model="sth" placeholder="Input sth."></textarea>
+        <p> TEXTAREA : {{ sth }} </p>
+        <h1>选择框</h1>
+        <input type="checkbox" id="checkbox1" v-model="checked">
+        <label for="checkbox1">{{ checked }}</label>
+        <br>
+        <h1>复选框</h1>
+        <input type="checkbox" id="id1" value="Jack" v-model="names">
+        <label for="id1">Jack</label>
+        <input type="checkbox" id="id2" value="David" v-model="names">
+        <label for="id2">David</label>
+        <input type="checkbox" id="id3" value="Tom" v-model="names">
+        <label for="id3">Tom</label>
+        <input type="checkbox" id="id4" value="John" v-model="names">
+        <label for="id4">John</label>
+        <p>{{ names }}</p>
+        <h1>单选</h1>
+        <input type="radio" id="first" value="First" v-model="singleSelect">
+        <label for="first">First</label>
+        <input type="radio" id="second" value="Second" v-model="singleSelect">
+        <label for="second">second</label>
+        <p>{{ singleSelect }}</p>
+        <h1>选择框</h1>
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <br>
+        <span>Selected: {{ selected }}</span>
+        <br>
+        <select v-model="selectedList" multiple style="width: 50px;">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected: {{ selectedList }}</span>
+        <h1>v-for绑定测试</h1>
+        <select v-model="selectedItem">
+            <option v-for="item in options" v-bind:value="item.value">
+                {{ item.text }}
+            </option>
+        </select>
+        <span>Selected: {{ selectedItem }}</span>
+        <h1>数字输入</h1>
+        <input v-model.number="num" type="number">
+        <h1>去除空格</h1>
+        <input v-model.trim="test">
+    </div>
+</body>
+<script type="text/javascript">
+	var app = new Vue({
+        el: "#app",
+        data: {
+            msg: "",
+            sth: "",
+            checked: false,
+            names: [],
+            singleSelect: "",
+            selected: "",
+            selectedList: [],
+            selectedItem: "A",
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ],
+            num: "",
+            test: ""
+        }
+    });
+</script>
+</html>
