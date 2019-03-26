@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VueTest</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<div id="app" :style="{ fontSize: fz + 'em'}">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <!-- <my-blog
+            v-for="item in posts"
+            v-bind:title="item.title"
+            v-bind:key="item.id"
+        ></my-blog>
+
+        <my-blog2
+            v-for="item in posts"
+            v-bind:item="item"
+            v-bind:key="item.id"
+        ></my-blog2> -->
+
+        <my-blog3
+            v-for="item in posts"
+            v-bind:item="item"
+            v-bind:key="item.id"
+            v-on:enlargefont="large"
+        ></my-blog3>
+
+        <my-input
+            v-bind:value="mytext"
+            v-on:input="mytext = $event"
+        ></my-input>
+        <p>{{ mytext }}</p>
+        <my-input v-model="mytext"></my-input>
+        <h1>{{ mytext }}</h1>
+    </div>
+</body>
+<script type="text/javascript">
+    //这里组件的data返回的必须是一个函数，每个实例才可以维护一份被返回对象的独立的拷贝
+    Vue.component('button-counter', {
+        template: `<button v-on:click="count++">This button had been clicked for {{count}} time(s).</button>`,
+        data: function() {
+            return {
+                count: 0
+            }
+        }
+    });
+
+    Vue.component('my-blog', {
+        props: ['title'],
+        template: `<h2>{{title}}</h2>`
+    });
+
+    Vue.component('my-blog2', {
+        props: ['item'],
+        template: `<h2>{{item.title}}</h2>`
+    });
+
+    Vue.component('my-blog3', {
+        props: ['item'],
+        template: `<div><h2>{{item.title}}</h2><button v-on:click="$emit('enlargefont', 0.1)">CLICK TO ENLARGE</button></div>`
+    });
+
+    Vue.component('my-input', {
+        props: ['value'],
+        template: `<div><p>This is my input: </p><input v-on:input="$emit('input', $event.target.value)"></input></div>`
+    });
+
+	var app = new Vue({
+        el: "#app",
+        data: {
+            posts: [
+                { id: 1, title: 'My journey with Vue' },
+                { id: 2, title: 'Blogging with Vue' },
+                { id: 3, title: 'Why Vue is so fun' }
+            ],
+            fz: 1,
+            mytext: ""
+        },
+        methods: {
+            large: function(size) {
+                this.fz += 0.1;
+            }
+        },
+    });
+</script>
+</html>
