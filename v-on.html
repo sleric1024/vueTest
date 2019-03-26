@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VueTest</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<div id="app">
+        <!-- 运行一些JavaScript的指令代码 -->
+        <button v-on:click="count += 1">CLICK ADD 1</button>
+        <p>This button above has been clicked {{count}} times.</p>
+
+        <button @click="greet">Greet</button>
+        <button @click="say('Hi', $event)">Hi</button>
+        <!-- <div @click.ctrl="listenKeyup">TEST CLICK KEYUP CTRL</div> -->
+        <input v-on:keyup.page-down="listenKeyup">
+        <!-- 有且只有 Ctrl 被按下的时候才触发 -->
+        <button @click.ctrl.exact="onCtrlClick">A</button>
+    </div>
+</body>
+<script type="text/javascript">
+	var app = new Vue({
+        el: "#app",
+        data: {
+            count: 0,
+            name: "vue.js"
+        },
+        methods: {
+            greet: function(event) {
+                alert("Hello " + this.name + "!");
+                if (event) {
+                    alert(event.target.tagName);
+                }
+            },
+            say: function(message, event) {
+                if (event) {
+                    event.preventDefault();
+                    alert(message);
+                }
+            },
+            listenKeyup: function(event) {
+                alert(event.target.tagName);
+            },
+            onCtrlClick: function(event) {
+                alert("Only Ctrl is clicked!");
+            }
+        }
+    });
+</script>
+</html>
