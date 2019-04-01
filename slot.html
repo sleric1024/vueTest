@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VueTest</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<div id="app">
+        <base-layout>
+            <template v-slot:header v-bind:user="user">
+                <h1>Here is the page title.  Welcome {{user.name}} to visit.</h1>
+            </template>
+            <p>Page content</p>
+            <h2>Some other things</h2>
+            <template v-slot:footer>
+                <h2>This is page footer.</h2>
+            </template>
+        </base-layout>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.component('base-layout', {
+        template: `<div class="container">
+            <header>
+                <slot name="header"></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
+        </div>`
+    });
+	var app = new Vue({
+        el: "#app",
+        data: {
+            user: {
+                name: "Jack"
+            }
+        }
+    });
+</script>
+</html>
